@@ -14,6 +14,6 @@ public class RGFService {
     RGFRepository rgfRepository;
 
     public List<RGFDto> getRGF(int anoExercicio, String inPeriodicidade, int numeroPeriodo, String codigoTipoDemonstrativo, String nomeAnexo, String codigoEsfera, int idEnte) {
-        return List.of(rgfRepository.getRGF(anoExercicio, inPeriodicidade, numeroPeriodo, codigoTipoDemonstrativo, nomeAnexo, codigoEsfera, idEnte));
+        return rgfRepository.getRGF(anoExercicio, inPeriodicidade, numeroPeriodo, codigoTipoDemonstrativo, nomeAnexo, codigoEsfera, idEnte);
     }
 }

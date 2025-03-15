@@ -1,9 +1,9 @@
 package org.doug.client;
 
+import jakarta.json.JsonObject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.QueryParam;
-import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 @RegisterRestClient(baseUri = "https://apidatalake.tesouro.gov.br/ords/siconfi/tt")
@@ -11,7 +11,7 @@ public interface RGFClient {
 
     @GET
     @Path("/rgf")
-    Response getRGF(
+    JsonObject getRGF(
             @QueryParam("an_exercicio") int anoExercicio,
             @QueryParam("in_periodicidade") String inPeriodicidade,
             @QueryParam("nr_periodo") int numeroPeriodo,

@@ -11,9 +11,10 @@ import java.util.List;
 public class RREOService {
 
     @Inject
-    private RREORepository rreoRepository;
+    RREORepository rreoRepository;
 
     public List<RREODto> getRREO(int anoExercicio, int numeroPeriodo, String codigoTipoDemonstrativo, String nomeAnexo, String codigoEsfera, int idEnte) {
-        return List.of(rreoRepository.getRREO(anoExercicio, numeroPeriodo, codigoTipoDemonstrativo, nomeAnexo, codigoEsfera, idEnte));
+        return rreoRepository.getRREO(anoExercicio, numeroPeriodo, codigoTipoDemonstrativo, nomeAnexo, codigoEsfera, idEnte);
     }
+
 }

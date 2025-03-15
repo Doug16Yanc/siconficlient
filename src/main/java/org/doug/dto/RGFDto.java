@@ -5,14 +5,14 @@ public record RGFDto(
         Long periodo,
         String periodicidade,
         String instituicao,
-        Long cod_ibge,
+        Long codIbge,
         String uf,
-        String co_poder,
+        String coPoder,
         Long populacao,
         String anexo,
         String rotulo,
         String coluna,
-        String cod_conta,
+        String codConta,
         String conta,
         Double valor
 ) {

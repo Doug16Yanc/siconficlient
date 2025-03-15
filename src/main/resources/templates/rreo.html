@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabela RREO</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid black;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Exercício</th>
+        <th>Demonstrativo</th>
+        <th>Período</th>
+        <th>Periodicidade</th>
+        <th>Instituição</th>
+        <th>Código IBGE</th>
+        <th>UF</th>
+        <th>População</th>
+        <th>Anexo</th>
+        <th>Rótulo</th>
+        <th>Coluna</th>
+        <th>Código Conta</th>
+        <th>Conta</th>
+        <th>Valor</th>
+    </tr>
+    </thead>
+    <tbody>
+    {#for item in items}
+        <tr>
+            <td>{item.exercicio}</td>
+            <td>{item.demonstrativo}</td>
+            <td>{item.periodo}</td>
+            <td>{item.periodicidade}</td>
+            <td>{item.instituicao}</td>
+            <td>{item.codIbge}</td>
+            <td>{item.uf}</td>
+            <td>{item.populacao}</td>
+            <td>{item.anexo}</td>
+            <td>{item.rotulo}</td>
+            <td>{item.coluna}</td>
+            <td>{item.codConta}</td>
+            <td>{item.conta}</td>
+            <td>{item.valor}</td>
+        </tr>
+    {/for}
+    </tbody>
+</table>
+</body>
+</html>
