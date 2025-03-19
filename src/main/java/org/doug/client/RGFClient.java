@@ -1,6 +1,6 @@
 package org.doug.client;
 
-import jakarta.json.JsonObject;
+import io.vertx.core.json.JsonObject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.QueryParam;
@@ -18,6 +18,7 @@ public interface RGFClient {
             @QueryParam("co_tipo_demonstrativo") String codigoTipoDemonstrativo,
             @QueryParam("no_anexo") String nomeAnexo,
             @QueryParam("co_esfera") String codigoEsfera,
+            @QueryParam("co_poder") String codigoPoder,
             @QueryParam("id_ente") int idEnte
     );
 }
