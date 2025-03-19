@@ -1,8 +1,6 @@
 package org.doug.controller;
 
 import io.quarkus.qute.Template;
-import io.quarkus.qute.TemplateInstance;
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
