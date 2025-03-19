@@ -91,6 +91,7 @@ public class RGFController {
                         item.populacao(),
                         item.anexo(),
                         item.rotulo(),
+                        item.coluna(),
                         item.codConta(),
                         item.conta(),
                         item.valor()
