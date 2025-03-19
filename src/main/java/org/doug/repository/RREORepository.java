@@ -26,8 +26,22 @@ public class RREORepository {
     @Inject
     ObjectMapper objectMapper;
 
-    public List<RREODto> getRREO(int anoExercicio, int numeroPeriodo, String codigoTipoDemonstrativo, String nomeAnexo, String codigoEsfera, int idEnte) {
-        JsonObject response = rreoClient.getRREO(anoExercicio, numeroPeriodo, codigoTipoDemonstrativo, nomeAnexo, codigoEsfera, idEnte);
+    public List<RREODto> getRREO(
+            int anoExercicio,
+            int numeroPeriodo,
+            String codigoTipoDemonstrativo,
+            String nomeAnexo,
+            String codigoEsfera,
+            int idEnte
+    ) {
+        JsonObject response = rreoClient.getRREO(
+                anoExercicio,
+                numeroPeriodo,
+                codigoTipoDemonstrativo,
+                nomeAnexo,
+                codigoEsfera,
+                idEnte
+        );
 
         if (!response.containsKey("items")) {
             return Collections.emptyList();
@@ -36,7 +50,8 @@ public class RREORepository {
         JsonArray itemsArray = response.getJsonArray("items");
 
         List<Map<String, Object>> items = itemsArray.stream()
-                .map(jsonValue -> objectMapper.convertValue(jsonValue, new TypeReference<Map<String, Object>>() {}))
+                .map(jsonValue -> objectMapper.convertValue(jsonValue, new TypeReference<Map<String, Object>>() {
+                }))
                 .toList();
 
         return items.stream()

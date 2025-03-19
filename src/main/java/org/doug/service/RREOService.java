@@ -13,8 +13,22 @@ public class RREOService {
     @Inject
     RREORepository rreoRepository;
 
-    public List<RREODto> getRREO(int anoExercicio, int numeroPeriodo, String codigoTipoDemonstrativo, String nomeAnexo, String codigoEsfera, int idEnte) {
-        return rreoRepository.getRREO(anoExercicio, numeroPeriodo, codigoTipoDemonstrativo, nomeAnexo, codigoEsfera, idEnte);
+    public List<RREODto> getRREO(
+            int anoExercicio,
+            int numeroPeriodo,
+            String codigoTipoDemonstrativo,
+            String nomeAnexo,
+            String codigoEsfera,
+            int idEnte
+    ) {
+        return rreoRepository.getRREO(
+                anoExercicio,
+                numeroPeriodo,
+                codigoTipoDemonstrativo,
+                nomeAnexo,
+                codigoEsfera,
+                idEnte
+        );
     }
 
 }
