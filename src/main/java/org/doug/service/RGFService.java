@@ -13,7 +13,25 @@ public class RGFService {
     @Inject
     RGFRepository rgfRepository;
 
-    public List<RGFDto> getRGF(int anoExercicio, String inPeriodicidade, int numeroPeriodo, String codigoTipoDemonstrativo, String nomeAnexo, String codigoEsfera, int idEnte) {
-        return rgfRepository.getRGF(anoExercicio, inPeriodicidade, numeroPeriodo, codigoTipoDemonstrativo, nomeAnexo, codigoEsfera, idEnte);
+    public List<RGFDto> getRGF(
+            int anoExercicio,
+            String inPeriodicidade,
+            int numeroPeriodo,
+            String codigoTipoDemonstrativo,
+            String nomeAnexo,
+            String codigoEsfera,
+            String codigoPoder,
+            int idEnte
+    ) {
+        return rgfRepository.getRGF(
+                anoExercicio,
+                inPeriodicidade,
+                numeroPeriodo,
+                codigoTipoDemonstrativo,
+                nomeAnexo,
+                codigoEsfera,
+                codigoPoder,
+                idEnte
+        );
     }
 }
