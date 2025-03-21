@@ -17,7 +17,9 @@ import org.doug.service.RREOService;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("/rreo")
@@ -59,12 +61,35 @@ public class RREOController {
             @QueryParam("co_tipo_demonstrativo") String codigoTipoDemonstrativo,
             @QueryParam("no_anexo") String nomeAnexo,
             @QueryParam("co_esfera") String codigoEsfera,
-            @QueryParam("id_ente") int idEnte) {
+            @QueryParam("id_ente") int idEnte,
+            @QueryParam("todos_periodos") Boolean todosPeriodos) {
 
-        List<RREODto> items = rreoService.getRREO(
-                anoExercicio, numeroPeriodo, codigoTipoDemonstrativo,
-                nomeAnexo, codigoEsfera, idEnte
-        );
+        nomeAnexo = URLDecoder.decode(nomeAnexo, StandardCharsets.UTF_8);
+
+        List<RREODto> items = new ArrayList<>();
+
+        if (Boolean.TRUE.equals(todosPeriodos)) {
+            for (int i = 1; i <= 6; i++) {
+                List<RREODto> periodoItems = rreoService.getRREO(
+                        anoExercicio, i, codigoTipoDemonstrativo, nomeAnexo, codigoEsfera, idEnte
+                );
+                items.addAll(periodoItems);
+            }
+        } else if (numeroPeriodo > 0) {
+            items = rreoService.getRREO(
+                    anoExercicio, numeroPeriodo, codigoTipoDemonstrativo, nomeAnexo, codigoEsfera, idEnte
+            );
+        } else {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Parâmetro 'nr_periodo' é obrigatório quando 'todos_periodos' é false.")
+                    .build();
+        }
+
+        if (items.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("Nenhum dado encontrado para os parâmetros fornecidos.")
+                    .build();
+        }
 
         try (ByteArrayOutputStream out = new ByteArrayOutputStream();
              CSVPrinter printer = new CSVPrinter(
@@ -101,7 +126,9 @@ public class RREOController {
                     .build();
 
         } catch (IOException e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Erro ao gerar o arquivo CSV.")
+                    .build();
         }
     }
 }
