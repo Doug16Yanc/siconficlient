@@ -76,100 +76,126 @@
 <div class="form-container">
     <h2>Relatório Resumido de Execução Orçamentária</h2>
     <form method="GET" action="/rreo/csv">
+       <!-- <div class="form-group">
+            <label>Exercício (ano) <span class="required">*</span></label>
+            <input type="number" name="an_exercicio" id="an_exercicio" min="2000" max="2099" required>
+        </div> -->
 
-        <form method="GET" action="/rreo/csv">
-            <div class="form-group">
-                <label>Exercício (ano) <span class="required">*</span></label>
-                <input type="number" name="an_exercicio" id="an_exercicio" min="2000" max="2099" required>
-            </div>
+        <div class="form-group" style="display: flex">
+            <label for="todos_periodos" style="margin-left: 8px;">Baixar todos os períodos do ano escolhido</label>
+            <input type="checkbox" id="todos_periodos" name="todos_periodos">
+        </div>
 
-            <div class="form-group" style="display: flex">
-                <label for="todos_periodos" style="margin-left: 8px;">Baixar todos os períodos do ano escolhido</label>
-                <input type="checkbox" id="todos_periodos" name="todos_periodos">
-            </div>
+        <div class="form-group" id="periodo_field">
+            <label>Número do Período <span class="required">*</span></label>
+            <input type="number" name="nr_periodo" id="nr_periodo" min="1" max="6" required>
+            <div class="form-note">(1-6 bimestres por ano)</div>
+        </div>
 
-            <div class="form-group" id="periodo_field">
-                <label>Número do Período <span class="required">*</span></label>
-                <input type="number" name="nr_periodo" id="nr_periodo" min="1" max="6" required>
-                <div class="form-note">(1-6 bimestres por ano)</div>
-            </div>
+        <div class="form-group" style="display: flex">
+            <label for="todos_municipios" style="margin-left: 8px;">Baixar dados de todos os municípios do estado</label>
+            <input type="checkbox" id="todos_municipios" name="todos_municipios">
+        </div>
 
-            <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                    let checkbox = document.getElementById("todos_periodos");
-                    let periodoField = document.getElementById("nr_periodo");
-                    let periodoGroup = document.getElementById("periodo_field");
+        <div class="form-group" id="municipio_field">
+            <label>Código IBGE do Ente <span class="required">*</span></label>
+            <input type="number" name="id_ente" id="id_ente" required>
+            <div class="form-note">Ex: 23 (Ceará), 2304400 (Fortaleza-CE)</div>
+        </div>
 
-                    function atualizarPeriodo() {
-                        if (checkbox.checked) {
-                            periodoField.disabled = true;
-                            periodoField.removeAttribute("required");
-                            periodoGroup.style.display = "none";
-                        } else {
-                            periodoField.disabled = false;
-                            periodoField.setAttribute("required", "true");
-                            periodoGroup.style.display = "block";
-                        }
-                    }
+        <div class="form-group">
+            <label>Tipo de Demonstrativo <span class="required">*</span></label>
+            <select name="co_tipo_demonstrativo" required>
+                <option value="RREO">RREO Padrão</option>
+                <option value="RREO Simplificado">RREO Simplificado</option>
+            </select>
+        </div>
 
-                    atualizarPeriodo();
-                    checkbox.addEventListener("change", atualizarPeriodo);
+        <div class="form-group">
+            <label>Esfera <span class="required">*</span></label>
+            <select name="co_esfera" required>
+                <option value="">Selecione</option>
+                <option value="M">Municípios</option>
+                <option value="E">Estados e DF</option>
+                <option value="U">União</option>
+                <option value="C">Consórcio</option>
+            </select>
+        </div>
 
-                    document.querySelector("form").addEventListener("submit", function (event) {
-                        if (checkbox.checked) {
-                            checkbox.value = "true";
-                        } else {
-                            checkbox.value = "false";
-                        }
-                    });
-                });
-            </script>
+        <div class="form-group">
+            <label>Anexo</label>
+            <select name="no_anexo">
+                <option value="RREO-Anexo 01">RREO-Anexo 01</option>
+                <option value="RREO-Anexo 02">RREO-Anexo 02</option>
+                <option value="RREO-Anexo 03">RREO-Anexo 03</option>
+                <option value="RREO-Anexo 04">RREO-Anexo 04</option>
+                <option value="RREO-Anexo 06">RREO-Anexo 06</option>
+            </select>
+            <div class="form-note">Ex: RREO-Anexo 01</div>
+        </div>
 
-
-
-            <div class="form-group">
-                <label>Tipo de Demonstrativo <span class="required">*</span></label>
-                <select name="co_tipo_demonstrativo" required>
-                    <option value="RREO">RREO Padrão</option>
-                    <option value="RREO Simplificado">RREO Simplificado</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Código IBGE do Ente <span class="required">*</span></label>
-                <input type="number" name="id_ente" required>
-                <div class="form-note">Ex: 23 (Ceará),  2304400 (Fortaleza-CE)</div>
-            </div>
-
-            <div class="form-group">
-                <label>Esfera <span class="required">*</span></label>
-                <select name="co_esfera" required>
-                    <option value="">Selecione</option>
-                    <option value="M">Municípios</option>
-                    <option value="E">Estados e DF</option>
-                    <option value="U">União</option>
-                    <option value="C">Consórcio</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Anexo</label>
-                <select name="no_anexo">
-                    <option value="RREO-Anexo 01">RREO-Anexo 01</option>
-                    <option value="RREO-Anexo 02">RREO-Anexo 02</option>
-                    <option value="RREO-Anexo 03">RREO-Anexo 03</option>
-                    <option value="RREO-Anexo 04">RREO-Anexo 04</option>
-                    <option value="RREO-Anexo 06">RREO-Anexo 06</option>
-                </select>
-                <div class="form-note">Ex: RREO-Anexo 01</div>
-            </div>
-
-            <div class="final_column">
-                <button type="submit">Baixar Dados</button>
-                <div class="form-note">* Campos obrigatórios</div>
-            </div>
-        </form>
+        <div class="final_column">
+            <button type="submit">Baixar Dados</button>
+            <div class="form-note">* Campos obrigatórios</div>
+        </div>
     </form>
-    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let checkboxPeriodos = document.getElementById("todos_periodos");
+        let periodoField = document.getElementById("nr_periodo");
+        let periodoGroup = document.getElementById("periodo_field");
+
+        function atualizarPeriodo() {
+            if (checkboxPeriodos.checked) {
+                periodoField.disabled = true;
+                periodoField.removeAttribute("required");
+                periodoGroup.style.display = "none";
+            } else {
+                periodoField.disabled = false;
+                periodoField.setAttribute("required", "true");
+                periodoGroup.style.display = "block";
+            }
+        }
+
+        atualizarPeriodo();
+        checkboxPeriodos.addEventListener("change", atualizarPeriodo);
+
+        // Lógica para o checkbox "Baixar todos os municípios"
+        let checkboxMunicipios = document.getElementById("todos_municipios");
+        let municipioField = document.getElementById("id_ente");
+        let municipioGroup = document.getElementById("municipio_field");
+
+        function atualizarMunicipio() {
+            if (checkboxMunicipios.checked) {
+                municipioField.disabled = true;
+                municipioField.removeAttribute("required");
+                municipioGroup.style.display = "none";
+            } else {
+                municipioField.disabled = false;
+                municipioField.setAttribute("required", "true");
+                municipioGroup.style.display = "block";
+            }
+        }
+
+        atualizarMunicipio();
+        checkboxMunicipios.addEventListener("change", atualizarMunicipio);
+
+        document.querySelector("form").addEventListener("submit", function (event) {
+            if (checkboxPeriodos.checked) {
+                checkboxPeriodos.value = "true";
+            } else {
+                checkboxPeriodos.value = "false";
+            }
+
+            if (checkboxMunicipios.checked) {
+                checkboxMunicipios.value = "true";
+            } else {
+                checkboxMunicipios.value = "false";
+            }
+        });
+    });
+</script>
 </body>
 </html>
